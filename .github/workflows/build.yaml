@@ -1,0 +1,35 @@
+name: .NET Build
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: windows-latest # Or windows-latest, macOS-latest
+    steps:
+    - uses: actions/checkout@v4 # Checks out your repository code
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '4.8.x' # Specify the .NET SDK version you need
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore # Builds the project, skipping restore as it's already done
+    - name: Publish
+      run: dotnet publish --configuration Release --output ./publish
+    - uses: actions/setup-dotnet@v4
+      with:
+          dotnet-version: '4.8.x' # SDK Version to use.
+      env:
+          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+    - run: dotnet build --configuration Release albion-radar-deatheye-2pc
+    - name: Create the package
+      run: dotnet pack --configuration Release albion-radar-deatheye-2pc
+    - name: Publish the package to GPR
+      run: dotnet nuget push albion-radar-deatheye-2pc/bin/Release/*.nupkg
