@@ -16,7 +16,7 @@ jobs:
     - name: Setup .NET SDK
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '4.8.x' # Specify the .NET SDK version you need
+        dotnet-version: 4 # Specify the .NET SDK version you need
         cache: false
     - name: Display dotnet version
       run: dotnet --version
