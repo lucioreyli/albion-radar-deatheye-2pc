@@ -161,7 +161,7 @@ namespace X975.Radar.GameObjects.LocalPlayer
                             ? "Standard"
                             : "Unknown";
 
-            return type + " - " + rarity;
+            return name + " - " + type + " - " + rarity;
         }
 
         public void UpdateClusterObjectives(Dictionary<int, ClusterObjective> clusterObjectives)
