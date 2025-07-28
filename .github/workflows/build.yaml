@@ -23,8 +23,8 @@ jobs:
 #      run: dotnet publish --configuration Release --output ./publish
 #      env:
 #          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-    - run: dotnet build --configuration Release albion-radar-deatheye-2pc
+    - run: dotnet build --configuration Release
     - name: Create the package
-      run: dotnet pack --configuration Release albion-radar-deatheye-2pc
+      run: dotnet pack --configuration Release
     - name: Publish the package to GPR
       run: dotnet nuget push albion-radar-deatheye-2pc/bin/Release/*.nupkg
