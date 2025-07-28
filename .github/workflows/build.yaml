@@ -23,9 +23,6 @@ jobs:
       run: dotnet build --no-restore # Builds the project, skipping restore as it's already done
     - name: Publish
       run: dotnet publish --configuration Release --output ./publish
-    - uses: actions/setup-dotnet@v4
-      with:
-          dotnet-version: '4.8.x' # SDK Version to use.
       env:
           NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
     - run: dotnet build --configuration Release albion-radar-deatheye-2pc
