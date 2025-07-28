@@ -62,10 +62,6 @@
     <PropertyGroup>
         <ApplicationIcon>logo.ico</ApplicationIcon>
     </PropertyGroup>
-    <PropertyGroup> 
-<GenerateResourceMSBuildArchitecture>CurrentArchitecture</GenerateResourceMSBuildArchitecture>
-<GenerateResourceMSBuildRuntime>CurrentRuntime</GenerateResourceMSBuildRuntime>
-</PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
         <DebugSymbols>true</DebugSymbols>
         <OutputPath>bin\x86\Debug\</OutputPath>
