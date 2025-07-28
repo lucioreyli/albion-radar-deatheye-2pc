@@ -11,12 +11,17 @@ on:
 jobs:
   build:
     runs-on: windows-latest # Or windows-latest, macOS-latest
+    strategy:
+      matrix:
+        dotnet-version: [ '4.8.x' ]
     steps:
     - uses: actions/checkout@v4 # Checks out your repository code
     - name: Setup .NET SDK
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 4.8 # Specify the .NET SDK version you need
+        dotnet-version: ${{ matrix.dotnet-version }} # Specify the .NET SDK version you need
+    - name: Display dotnet version
+      run: dotnet --version
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
