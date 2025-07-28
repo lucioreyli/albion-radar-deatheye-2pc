@@ -19,8 +19,6 @@ jobs:
       run: dotnet --version
     - name: Restore dependencies
       run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore # Builds the project, skipping restore as it's already done
     - name: Publish
       run: dotnet publish --configuration Release --output ./publish
       env:
