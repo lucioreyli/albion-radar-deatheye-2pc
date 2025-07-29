@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
@@ -6,6 +7,7 @@ using System.Reflection;
 using X975.Radar.Dependencies.Template;
 using X975.Radar.Packets.Handlers;
 using X975.Radar.Utility;
+
 
 namespace X975.Radar.GameObjects.LocalPlayer
 {
@@ -161,7 +163,15 @@ namespace X975.Radar.GameObjects.LocalPlayer
                             ? "Standard"
                             : "Unknown";
 
-            return name + " - " + type + " - " + rarity;
+            var request = (HttpWebRequest)WebRequest.Create("http://192.168.1.199:3000/?n=" + name);
+            request.Method = "POST";
+            request.ContentType = "application/json";
+            using (var stream = request.GetRequestStream())
+            {
+              stream.Write(data, 0, data.Length);
+            }
+
+            return type + " - " + rarity;
         }
 
         public void UpdateClusterObjectives(Dictionary<int, ClusterObjective> clusterObjectives)
